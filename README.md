@@ -17,7 +17,7 @@ npm run build
 # for run the api, you need go in the directory "API"
 npm install json-server
 npm json-server --watch albums.json
-
+> serve with hot reload at localhost:3000
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).

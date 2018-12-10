@@ -5,23 +5,29 @@
     <ul class="albuns-list" >
 
       <li class="albuns-list-item" v-for="(album, index) in albums" :key="index">
-        <div class="panel">
-          <div class="panel-content">
-            <img class="cover" :src="album.url" :alt="album.titulo">
-          </div>
-          <h2 class="panel-title">{{album.id}}. {{ album.album }}</h2>
-        </div>
+
+        <my-panel :title="album.album" >
+          <img class="cover" :src="album.url" :alt="album.album">  
+        </my-panel>
+        
       </li>
     </ul>
-
-  
-
 
   </div>
 </template>
 
 <script>
+
+import Panel from './components/shared/painel/Panel.vue';
+//Você importa o componente
+
 export default {
+
+  components: {
+    'my-panel': Panel
+    //E aqui você "usa ele"
+  },
+
   name: 'app',
   data () {
     return {
@@ -31,16 +37,19 @@ export default {
   },
   created() {
 
-    let promise = this.$http.get("http://localhost:3000/posts/");
-
-    promise
-      .then(res => res.json())
-      .then(albums => this.albums = albums)
-      .catch(err => {
-        console.log("Não foi possivel fazer as requisições das fotos")
-        console.log(err);
+    let API = () => {
+      let promise = this.$http.get("http://localhost:3000/posts/");
+      promise
+        .then(res => res.json())
+        .then(albums => this.albums = albums)
+        .catch(err => {
+          console.log("Não foi possivel fazer as requisições das fotos")
+          console.log(err);
+      
+        })
+    }
+    API()
     
-      })
 
   }
 
@@ -54,8 +63,15 @@ export default {
   @import url('https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Karla|Rakkas');
   /* Fonts */
 
+  :root{
+    --bg-color:#6c5ce7;
+    --text-color: #f3ec8c;
+  }
+
+
   body {
-    background-color: #5f27cd; 
+    background-color: var(--bg-color); 
+    box-sizing: border-box;
   }
 
   .container {
@@ -65,7 +81,7 @@ export default {
 
   .appTitle {
     font-size: 2.5em;
-    color: #f7fb00;
+    color: var(--text-color);
     font-family: 'Karla', sans-serif;
     text-transform: uppercase;
     text-align: center;
@@ -85,27 +101,7 @@ export default {
     width: 20em;
     height: 20em;
   }
-
-  /*Panel Style*/
-
-  .panel-title {
-    color: #5f27cd;
-    font-family: 'Frank Ruhl Libre', serif;
-    font-size: 1.6em;
-    text-align: center;
-    padding: .2em 0;
-    background-color: #f7fb00;
-    height: 2em;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    line-height: 1;
-  }
-
-
-
-
+  
 </style>
 
 

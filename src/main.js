@@ -8,4 +8,3 @@ new Vue({
   el: '.testClass',
   render: h => h(Test)
 })
-

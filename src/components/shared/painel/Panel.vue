@@ -76,10 +76,7 @@ export default {
     height: 150%;
   }
 
-  .cover {
-    transition: .3s ease-in-out;
-    width: 100%;
-  }
+
 
 </style>
 

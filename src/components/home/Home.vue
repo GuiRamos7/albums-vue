@@ -8,15 +8,15 @@
     <ul class="albuns-list" >
 
       <li class="albuns-list-item" v-for="(album, index) in filterAlbums" :key="index">
-        <router-link :to="album.url">
-          <my-panel :title="album.album" >
-            <responsive-image :url="album.url" :title="album.album"></responsive-image> 
-          </my-panel>
-        </router-link>
+
+        <my-panel :title="album.album" >
+          <responsive-image :url="album.url" :title="album.album"></responsive-image> 
+        </my-panel>
+        <my-button type="button" text="Delete" @click.native="removeAlbum(album)"></my-button>
+
         
       </li>
     </ul>
-
   </div>
 </template>
 
@@ -24,13 +24,15 @@
 
 import Panel from '../shared/painel/Panel.vue';
 import ResponsiveImage from '../shared/responsive-image/ResponsiveImage.vue';
+import Button from '../shared/button/Button.vue';
 //Você importa o componente
 
 export default {
 
   components: {
     'my-panel': Panel,
-    'responsive-image': ResponsiveImage
+    'responsive-image': ResponsiveImage,
+    'my-button': Button
     //E aqui você "usa ele"
   },
 
@@ -66,6 +68,14 @@ export default {
         return this.albums.filter(albums => exp.test(albums.album));
       }else {
         return this.albums
+      }
+    }
+  },
+  methods: {
+    removeAlbum(album) {
+      if (confirm("Thas ok?")) {
+        alert(`vamos testar isso: ${album.album}`)
+        
       }
     }
   }

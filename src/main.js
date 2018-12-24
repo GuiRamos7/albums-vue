@@ -3,7 +3,6 @@ import Test from './App.vue'
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
 import {routes} from './routes';
-import {routesAlbum} from './routesAlbums'
 
 
 Vue.use(VueResource);
@@ -17,8 +16,9 @@ const router = new VueRouter({
 
 
 
+
 new Vue({
   el: '.testClass',
-  router: router,
+  router: router, 
   render: h => h(Test)
 })
